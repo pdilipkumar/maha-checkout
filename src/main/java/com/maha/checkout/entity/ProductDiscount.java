@@ -7,10 +7,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table
+@NamedNativeQueries(
+    @NamedNativeQuery(name = "findApplicableDiscount", resultClass = ProductDiscount.class,
+    query = "SELECT discount.* FROM product_discount discount WHERE discount.product_id = :productId " +
+        "ORDER BY ABS(discount.quantity - :totalQuantity) LIMIT 1")
+)
 public class ProductDiscount {
 
   @Id
