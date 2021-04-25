@@ -4,17 +4,22 @@ import com.maha.checkout.entity.ProductCatalogue;
 import com.maha.checkout.entity.ProductDiscount;
 import com.maha.checkout.repository.ProductCatalogueRepository;
 import com.maha.checkout.repository.ProductDiscountRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DataInitService {
 
+  private static final Logger logger = LoggerFactory.getLogger(DataInitService.class);
+
   private ProductCatalogueRepository productCatalogueRepository;
 
   private ProductDiscountRepository productDiscountRepository;
 
   public void init() {
+    logger.info("Loading records to database");
     // Rolex watch
     ProductCatalogue watch1 = new ProductCatalogue("001", "watch", "Rolex", 100);
     productCatalogueRepository.save(watch1);

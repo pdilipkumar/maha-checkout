@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/checkout")
