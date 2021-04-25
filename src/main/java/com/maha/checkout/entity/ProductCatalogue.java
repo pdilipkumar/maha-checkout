@@ -42,6 +42,14 @@ public class ProductCatalogue {
     this.unitPrice = unitPrice;
   }
 
+  public ProductCatalogue(Integer id, String productId, String productType, String name, Integer unitPrice) {
+    this.id = id;
+    this.productId = productId;
+    this.productType = productType;
+    this.name = name;
+    this.unitPrice = unitPrice;
+  }
+
   public Integer getId() {
     return id;
   }

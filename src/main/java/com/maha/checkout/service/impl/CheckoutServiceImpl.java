@@ -30,7 +30,7 @@ public class CheckoutServiceImpl implements CheckoutService {
     for(ProductCatalogue product : allProducts) {
       totalCost = totalCost + calculateCostPerProduct(product, productCount.get(product.getProductId()));
     }
-    return null;
+    return totalCost;
   }
 
   private Integer calculateCostPerProduct(ProductCatalogue product, Long totalQuantity) {
