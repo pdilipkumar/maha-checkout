@@ -19,6 +19,7 @@ dependencies {
 	implementation 'javax.validation:validation-api:2.0.1.Final'
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'junit:junit:4.13.2'
 }
 
 test {
@@ -26,5 +27,32 @@ test {
 	reports {
 		junitXml.enabled = true
 		html.enabled = true
+	}
+}
+
+configurations {
+	integrationTestImplementation.extendsFrom implementation
+	integrationTestRuntimeOnly.extendsFrom runtimeOnly
+	integrationTestImplementation.extendsFrom testImplementation
+}
+
+sourceSets {
+	integrationTest {
+		compileClasspath += sourceSets.main.output
+		runtimeClasspath += sourceSets.main.output
+	}
+}
+
+task integrationTest(type: Test) {
+	description = 'Runs the integration tests.'
+	group = 'verification'
+	testClassesDirs = sourceSets.integrationTest.output.classesDirs
+	classpath = sourceSets.integrationTest.runtimeClasspath
+
+	useJUnitPlatform()
+
+	reports {
+		html.enabled true
+		junitXml.enabled = true
 	}
 }

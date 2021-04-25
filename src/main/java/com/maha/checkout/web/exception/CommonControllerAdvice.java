@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -36,7 +37,7 @@ public class CommonControllerAdvice extends ResponseEntityExceptionHandler {
     Set<ConstraintViolation<?>> violations = exc.getConstraintViolations();
     ObjectMapper mapper = new ObjectMapper();
     HttpHeaders headers = new HttpHeaders();
-    headers.add(HttpHeaders.CONTENT_TYPE, request.getHeader(HttpHeaders.CONTENT_TYPE));
+    headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
     return new ResponseEntity<>(mapper.writeValueAsString(violations.stream().map(ConstraintViolation :: getMessage)
     .collect(Collectors.toList())), headers, HttpStatus.BAD_REQUEST);
   }
